@@ -25,10 +25,10 @@ you get full access to all of the music data provided by the Spotify platform.
 %autosetup
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" %{__python3} setup.py build
+%{__python3} setup.py build
 
 %install
-%{__python3} setup.py install -O1 --skip-build --root $RPM_BUILD_ROOT
+%{__python3} setup.py install -O1 --skip-build --root %{buildroot}
 
 #%check
 #%{__python3} setup.py test
