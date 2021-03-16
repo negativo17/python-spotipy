@@ -9,6 +9,7 @@ URL:            http://spotipy.readthedocs.org/
 BuildArch:      noarch
 
 Source0:        https://github.com/plamere/%{real_name}/archive/%{version}.tar.gz#/%{real_name}-%{version}.tar.gz
+Patch0:         %{real_name}-lower-requirements.patch
 
 BuildRequires:  python3-devel
 
@@ -24,7 +25,7 @@ Spotipy is a lightweight Python library for the Spotify Web API. With Spotipy
 you get full access to all of the music data provided by the Spotify platform.
 
 %prep
-%autosetup -n %{real_name}-%{version}
+%autosetup -p1 -n %{real_name}-%{version}
 
 %build
 %{__python3} setup.py build
