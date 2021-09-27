@@ -2,7 +2,7 @@
 
 Name:           python-spotipy
 Version:        2.19.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A light weight Python library for the Spotify Web API
 License:        MIT
 URL:            http://spotipy.readthedocs.org/
@@ -12,37 +12,44 @@ Source0:        https://github.com/plamere/%{real_name}/archive/%{version}.tar.g
 Patch0:         %{real_name}-lower-requirements.patch
 
 BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
+#BuildRequires:  python3dist(pytest)
 
-%description
+%global _description %{expand:
 Spotipy is a lightweight Python library for the Spotify Web API. With Spotipy
-you get full access to all of the music data provided by the Spotify platform.
+you get full access to all of the music data provided by the Spotify platform.}
+
+%description %_description
 
 %package     -n python3-spotipy
-Summary:        A light weight Python library for the Spotify Web API
+Summary:        %{summary}
 
-%description -n python3-spotipy
-Spotipy is a lightweight Python library for the Spotify Web API. With Spotipy
-you get full access to all of the music data provided by the Spotify platform.
+%description -n python3-spotipy %_description
 
 %prep
 %autosetup -p1 -n %{real_name}-%{version}
+%generate_buildrequires
+%pyproject_buildrequires -r
 
 %build
-%{__python3} setup.py build
+%pyproject_wheel
 
 %install
-%{__python3} setup.py install -O1 --skip-build --root %{buildroot}
+%pyproject_install
+%pyproject_save_files spotipy
 
-#%check
-#%{__python3} setup.py test
+%check
+# Requires network:
+#tox
+%py3_check_import %{real_name}
 
-%files -n python3-spotipy
+%files -n python3-spotipy -f %{pyproject_files}
 %license LICENSE.md
 %doc CHANGELOG.md README.md
-%{python3_sitelib}/*
 
 %changelog
+* Mon Sep 27 2021 Simone Caronni <negativo17@gmail.com> - 2.19.0-3
+- Update SPEC file for current packaging guidelines.
+
 * Wed Sep 22 2021 Fabio Valentini <decathorpe@gmail.com> - 2.19.0-2
 - Add BR: python3-setuptools to fix build on Fedora 35+.
 
