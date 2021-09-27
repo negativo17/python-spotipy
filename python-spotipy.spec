@@ -9,7 +9,6 @@ URL:            http://spotipy.readthedocs.org/
 BuildArch:      noarch
 
 Source0:        https://github.com/plamere/%{real_name}/archive/%{version}.tar.gz#/%{real_name}-%{version}.tar.gz
-Patch0:         %{real_name}-lower-requirements.patch
 
 BuildRequires:  python3-devel
 #BuildRequires:  python3dist(pytest)
@@ -49,6 +48,7 @@ Summary:        %{summary}
 %changelog
 * Mon Sep 27 2021 Simone Caronni <negativo17@gmail.com> - 2.19.0-3
 - Update SPEC file for current packaging guidelines.
+- Drop requirements patch.
 
 * Wed Sep 22 2021 Fabio Valentini <decathorpe@gmail.com> - 2.19.0-2
 - Add BR: python3-setuptools to fix build on Fedora 35+.
