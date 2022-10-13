@@ -1,8 +1,8 @@
 %global real_name spotipy
 
 Name:           python-spotipy
-Version:        2.19.0
-Release:        3%{?dist}
+Version:        2.20.0
+Release:        1%{?dist}
 Summary:        A light weight Python library for the Spotify Web API
 License:        MIT
 URL:            http://spotipy.readthedocs.org/
@@ -46,6 +46,9 @@ Summary:        %{summary}
 %doc CHANGELOG.md README.md
 
 %changelog
+* Thu Oct 13 2022 Simone Caronni <negativo17@gmail.com> - 2.20.0-1
+- Update to 2.20.0.
+
 * Mon Sep 27 2021 Simone Caronni <negativo17@gmail.com> - 2.19.0-3
 - Update SPEC file for current packaging guidelines.
 - Drop requirements patch.
